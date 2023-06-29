@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>게시물 작성폼</title>
+</head>
+
+
+<style>
+    .layout{
+        width : 500px;
+        margin : 0 auto;
+        margin-top : 40px; //위에서 40px만큼 떨어지게 함
+    }
+
+    .layout input {
+        width : 100%;
+        box-sizing : border-box;
+    }
+
+    .layout textarea{
+        width : 100%;
+        margin-top : 10px;
+        min-height : 300px;
+    }
+
+</style>
+<body>
+    <div class="layout">
+        <form action="/board/writepro" method="post" enctype="multipart/form-data"> <!--아래 3개를 form안에 넣어주어야 함, 꿀팁 : shift로 감싼다음에 ctrl과 shift를 같이 누른뒤에 위아래키를 누르면 위 아래로 넣을 수 있다-->
+            <input name="title" type="text">
+            <textarea name="content"></textarea>
+            <input type="file" name="file">
+            <button type="submit">작성</button>  <!--submit -> 데이터를 전송. 버튼의 역할은 데이터를 전송하는 것이다.-->
+            <!--버튼을 누르면 form안에 있는 input과 textarea가 /board/writepro로 넘어가게되는 것이다.-->
+        </form>
+    </div>
+</body>
+</html>

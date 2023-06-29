@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 리스트 페이지</title>
+</head>
+<style>
+
+    .layout{
+        width : 500px;
+        margin : 0 auto;
+        margin-top : 40px; //위에서 40px만큼 떨어지게 함
+    }
+</style>
+
+<body>
+    <div class="layout">
+        <table>
+          <thead>
+            <tr>
+              <th>글번호</th>
+              <th>제목</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="board : ${list}"> <!--each는 반복문. list에서 board가 없어질때까지 반복-->
+              <td th:text="${board.id}">1</td>
+              <td>
+                  <a th:text="${board.title}" th:href="@{/board/view(id=${board.id})}"></a>
+                  <!--href는 링크를 걸어줌&ndash;&gt; board/list에 있는 제목을 누르면 board/view/id이렇게 이동-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+            <a th:if="${page != nowPage}" th:href="@{/board/list(page=${page-1}, searchKeyword = ${param.searchKeyword})}" th:text="${page}"> </a>
+            <strong th:if="${page == nowPage}" th:text="${page}" style="color : red"></strong>
+        </th:block>
+        <form th:action="@{/board/list}" method="get">
+            <input type="text" name="searchKeyword">
+            <button type="submit">검색</button>
+        </form>
+    </div>
+
+</body>
+</html>
